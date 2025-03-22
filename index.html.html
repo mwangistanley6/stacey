@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message for Stacey</title>
+    <style>
+        /* General Styling */
+        body {
+            background: linear-gradient(to bottom, #ffcccc, #ffffff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            color: #e91e63;
+            font-family: 'Georgia', serif;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #f06292;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Section Styling */
+        section {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* No Button Styling */
+        #no-button {
+            position: relative;
+            background-color: #bdbdbd;
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff1744;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            animation: float 6s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff1744;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -7.5px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 7.5px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(45deg); opacity: 0.7; }
+            50% { transform: translateY(-30px) rotate(45deg); opacity: 0.3; }
+            100% { transform: translateY(0) rotate(45deg); opacity: 0.7; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            p { font-size: 16px; }
+            button { font-size: 14px; padding: 8px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="heart" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 80%; top: 40%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 30%; top: 60%; animation-delay: 4s;"></div>
+
+    <main>
+        <!-- Section 1: Introduction -->
+        <section id="section1" class="active">
+            <h2>Welcome, Stacey!</h2>
+            <p>Hey Stacey! I made this little website just for you. It’s about us—our story—and something I’ve been wanting to ask you for a while. Ready? Click “Next” to start!</p>
+            <button onclick="nextSection(2)">Next</button>
+        </section>
+
+        <!-- Section 2: First Meeting -->
+        <section id="section2">
+            <h2>When We First Met</h2>
+            <p>Remember the COVID days? I was in Form 4, stuck at home, and so were you, living at your grandmother’s place near me. I was so nervous when I asked your cousin for your number, but texting you was the best decision I ever made. You told me you loved me, and I couldn’t believe it!</p>
+            <button onclick="nextSection(3)">Next</button>
+        </section>
+
+        <!-- Section 3: Growing Feelings -->
+        <section id="section3">
+            <h2>How I Fell for You</h2>
+            <p>Back then, I was too shy to hug you properly or even kiss you—I didn’t know how to show what I felt. But over time, even with us apart at different schools now, my feelings for you have only gotten stronger. Talking to you yesterday reminded me how much you mean to me.</p>
+            <button onclick="nextSection(4)">Next</button>
+        </section>
+
+        <!-- Section 4: The Big Question -->
+        <section id="section4">
+            <h2>Stacey, Will You Be My Girlfriend?</h2>
+            <p>I’ve waited so long to ask this, and I hope this makes up for all the times I was too nervous to say it right. Stacey, I love you. Will you be my girlfriend?</p>
+            <button id="yes-button">Yes</button>
+            <button id="no-button">No</button>
+        </section>
+
+        <!-- Section 5: Thank You Message -->
+        <section id="section5">
+            <h2>Thank You, Stacey!</h2>
+            <p>You’ve made me so happy—I’ll be smiling all day! Please let me know on WhatsApp.</p>
+        </section>
+    </main>
+
+    <script>
+        // Function to show the next section
+        function nextSection(sectionNumber) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`section${sectionNumber}`).classList.add('active');
+        }
+
+        // Make the No button escape
+        const noButton = document.getElementById('no-button');
+        noButton.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight - 40);
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        });
+
+        // Handle the Yes button click
+        const yesButton = document.getElementById('yes-button');
+        yesButton.addEventListener('click', () => {
+            nextSection(5); // Show the thank-you message
+        });
+    </script>
+</body>
+</html>
